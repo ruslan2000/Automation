@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" parallel="tests" thread-count="2">
+
+
+
+	<parameter name="number-of-times" value="2" />
+
+	<test name="SuiteTest1">
+	    <parameter name="webdriver-name" value="chrome" />
+		<!-- <groups> <run> <include name="stock" /> </run> </groups> -->
+		<classes>			
+			<class name="by.ruslan.automation.maven.test.SimpleTest">
+				<methods>
+					<include name="testStock" />
+					<include name="testLensStock" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+	<test name="SuiteTest2">
+	    <parameter name="webdriver-name" value="firefox" />
+		<classes>		
+			<class name="by.ruslan.automation.maven.test.SimpleTest">
+				<methods>
+					<include name="test1"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>

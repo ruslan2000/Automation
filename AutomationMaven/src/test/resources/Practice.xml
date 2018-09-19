@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Practice" verbose="1">
+
+	<parameter name="webdriver-name" value="Default" />
+	
+	<test name="Broken-Links">
+		<classes>
+			<class name="by.ruslan.automation.maven.test.TestPractice" >
+			    <methods>
+			        <include name="f" />
+			    </methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>

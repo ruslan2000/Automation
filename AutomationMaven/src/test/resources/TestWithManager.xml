@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="S1" verbose="1" parallel="tests" thread-count="5">
+
+	<test name="ST1">
+	    <parameter name="webdriver-name" value="" />
+		<classes>
+			<class name="by.ruslan.automation.maven.test.TestWithManager" />
+		</classes>
+	</test>
+
+	<test name="ST2">
+		<parameter name="webdriver-name" value="firefox" />
+		<classes>
+			<class name="by.ruslan.automation.maven.test.TestWithManager" />
+		</classes>
+	</test>
+
+
+</suite>

@@ -2,7 +2,6 @@ package by.ruslan.automation.maven.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -53,9 +52,8 @@ public class Manager {
 	}
 
 	public static RemoteWebDriver getRemoteWebDriver(Device device, App app) throws MalformedURLException {
-		String browserName = "mobileOS";
-		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
-				Platform.ANY);
+		//String browserName = "mobileOS";
+		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(), Platform.ANY);
 		capabilities.setCapability("platformName", device.getPlatformName());
 		capabilities.setCapability("deviceName", device.getId());
 

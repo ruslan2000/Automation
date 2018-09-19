@@ -1,14 +1,26 @@
 package by.ruslan.automation.maven.test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import java.io.IOException;
+import java.util.Properties;
+
+import by.ruslan.automation.maven.utilities.Manager;
 
 public class Main {
 
-	public static void main(String[] args) {
-		WebDriver driver = new HtmlUnitDriver(true);
+	public static void main(String[] args) throws IOException {
 		
-		driver.get("www.google.com");
+		
+		
+		Properties elements = Manager.getElementsRepository();
+		
+		
+		
+		System.out.println(elements.getProperty("searchButton"));
+		
+		
+		//WebDriver driver = Manager.getWebDriver("chrome");
+		
+		//driver.get("https://www.google.com");
 
 	}
 

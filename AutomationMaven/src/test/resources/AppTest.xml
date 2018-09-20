@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile">
+	<test name="Motorola-Moto-G5">
+		<parameter name="device-id" value="ZY2243SKXL" />
+		<classes>
+			<class name="by.ruslan.automation.maven.test.TestPractice" />
+		</classes>
+	</test> 
+</suite> 

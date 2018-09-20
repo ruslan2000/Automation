@@ -26,6 +26,7 @@ public class PrepareWebTest {
 	@AfterTest
 	public void afterAllTests() {
 		driver.quit();
+		System.out.println("Closing browser...");
 	}
 
 }

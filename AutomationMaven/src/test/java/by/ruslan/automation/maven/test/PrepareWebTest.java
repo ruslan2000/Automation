@@ -13,7 +13,7 @@ public class PrepareWebTest {
 
 	@Parameters({ "webdriver-name" })
 	@BeforeTest
-	public void beforeClass(String webdriverName) {
+	public void beforeAllTests(String webdriverName) {
 		
 		System.out.println("Opening browser...");
 		
@@ -24,7 +24,7 @@ public class PrepareWebTest {
 	}
 
 	@AfterTest
-	public void afterClass() {
+	public void afterAllTests() {
 		driver.quit();
 	}
 

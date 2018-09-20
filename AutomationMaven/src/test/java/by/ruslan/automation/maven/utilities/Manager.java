@@ -2,7 +2,6 @@ package by.ruslan.automation.maven.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -53,7 +52,7 @@ public class Manager {
 	}
 
 	public static RemoteWebDriver getRemoteWebDriver(Device device, App app) throws MalformedURLException {
-		String browserName = "mobileOS";
+		//String browserName = "mobileOS";
 		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
 				Platform.ANY);
 		capabilities.setCapability("platformName", device.getPlatformName());
@@ -69,23 +68,13 @@ public class Manager {
 
 	public static void takeSnapShot(String fileName) throws Exception {
 
-		// Convert web driver object to TakeScreenshot
-
 		TakesScreenshot scrShot = ((TakesScreenshot) driver);
-
-		// Call getScreenshotAs method to create image file
 
 		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
-		// Create a file path
-
 		String fileWithPath = SNAPSHOT_DIR.concat(fileName);
 
-		// Move image file to new destination
-
 		File DestFile = new File(fileWithPath);
-
-		// Copy file at destination
 
 		FileUtils.copyFile(SrcFile, DestFile);
 

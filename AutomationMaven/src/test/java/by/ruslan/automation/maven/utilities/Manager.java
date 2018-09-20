@@ -53,8 +53,10 @@ public class Manager {
 
 	public static RemoteWebDriver getRemoteWebDriver(Device device, App app) throws MalformedURLException {
 		//String browserName = "mobileOS";
-		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
+
+		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(), 
 				Platform.ANY);
+
 		capabilities.setCapability("platformName", device.getPlatformName());
 		capabilities.setCapability("deviceName", device.getId());
 

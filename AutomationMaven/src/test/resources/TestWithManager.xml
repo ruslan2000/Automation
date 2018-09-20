@@ -3,7 +3,7 @@
 <suite name="S1" verbose="1" parallel="tests" thread-count="5">
 
 	<test name="ST1">
-	    <parameter name="webdriver-name" value="" />
+	    <parameter name="webdriver-name" value="chrome" />
 		<classes>
 			<class name="by.ruslan.automation.maven.test.TestWithManager" />
 		</classes>

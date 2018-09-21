@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BrowserSuite">
   <test thread-count="5" name="Launch">
-      <parameter name="webdriver-name" value="chrome" />
+      <parameter name="webdriver-name" value="firefox" />
     <classes>
       <class name="by.ruslan.automation.maven.test.TestBrowser"/>
     </classes>

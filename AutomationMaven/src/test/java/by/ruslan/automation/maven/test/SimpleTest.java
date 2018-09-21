@@ -4,12 +4,16 @@ import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import by.ruslan.automation.maven.entity.Data;
 import by.ruslan.automation.maven.project.cbg.CBGpage;
 import by.ruslan.automation.maven.utilities.Manager;
+
+
+//@Listeners(by.ruslan.automation.maven.utilities.TestsListener.class)
 
 public class SimpleTest extends PrepareWebTest {
 
@@ -43,7 +47,7 @@ public class SimpleTest extends PrepareWebTest {
 
 		cbgPage.sleep(500);
 
-		System.out.println("Response with " + cbgPage.getRows() + " rows");
+		//System.out.println("Response with " + cbgPage.getRows() + " rows");
 
 		checkPageTitle(expectedPage);
 
@@ -64,7 +68,7 @@ public class SimpleTest extends PrepareWebTest {
 
 			checkPageTitle(expectedPage);
 
-			System.out.println("run --> " + numberOfTimes);
+			//System.out.println("run --> " + numberOfTimes);
 
 			cbgPage.goBack();
 

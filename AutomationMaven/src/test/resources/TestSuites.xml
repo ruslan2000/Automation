@@ -2,7 +2,9 @@
 
 <suite name="Suite1" verbose="1" parallel="tests" thread-count="2">
 
-
+    <listeners>
+        <listener class-name="by.ruslan.automation.maven.utilities.TestsListener" />
+    </listeners>
 
 	<parameter name="number-of-times" value="2" />
 

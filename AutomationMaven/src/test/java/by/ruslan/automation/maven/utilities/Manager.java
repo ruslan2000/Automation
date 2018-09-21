@@ -65,6 +65,7 @@ public class Manager {
 		case "CHROME":
 			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
 			//Deprecated for Java - using ChromeOptions instead 
+			
 			//DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
 			//sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			//driver = new ChromeDriver(sslHandler);

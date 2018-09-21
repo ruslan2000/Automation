@@ -1,7 +1,6 @@
 package by.ruslan.automation.maven.test;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import by.ruslan.automation.maven.utilities.Manager;
 
@@ -11,11 +10,8 @@ public class Main {
 		
 		
 		
-		Properties elements = Manager.getElementsRepository();
-		
-		
-		
-		System.out.println(elements.getProperty("searchButton"));
+				
+		System.out.println(Manager.getProperty("reportDir"));
 		
 		
 		//WebDriver driver = Manager.getWebDriver("chrome");

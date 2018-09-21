@@ -17,7 +17,8 @@ public class PrepareWebTest {
 		
 		System.out.println("Opening browser...");
 		
-		driver = Manager.getWebDriver(webdriverName);
+		//driver = Manager.getWebDriver(webdriverName);
+		driver = Manager.getSSLWebDriver(webdriverName);
 		
 		//driver.manage().window().maximize();
 		

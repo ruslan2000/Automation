@@ -15,10 +15,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import bsh.Capabilities;
 import by.ruslan.automation.maven.entity.App;
 import by.ruslan.automation.maven.entity.Device;
 
@@ -30,9 +34,9 @@ public class Manager {
 	private static WebDriver driver;
 	private static RemoteWebDriver remoteDriver;
 
-	public static WebDriver getWebDriver(String webdriverName) {
+	public static WebDriver getWebDriver(String webDriverName) {
 
-		switch (webdriverName.toUpperCase()) {
+		switch (webDriverName.toUpperCase()) {
 
 		case "CHROME":
 			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
@@ -49,6 +53,35 @@ public class Manager {
 			// driver = new PhantomJSDriver();
 			return driver;
 		}
+	}
+	
+	//SSL Certificate Error Handling
+	public static WebDriver getSSLWebDriver(String webDriverName) {
+		
+		switch (webDriverName.toUpperCase()) {
+
+		case "CHROME":
+			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
+			DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
+			sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			driver = new ChromeDriver(sslHandler);
+			return driver;
+
+		case "FIREFOX":
+			System.setProperty("webdriver.driver.firefox", "src/main/resources/geckodriver.exe");
+			ProfilesIni prof = new ProfilesIni();				
+			FirefoxProfile ffProfile= prof.getProfile ("myProfile");
+			ffProfile.setAcceptUntrustedCertificates(true); 
+			ffProfile.setAssumeUntrustedCertificateIssuer(false);
+			driver = new FirefoxDriver((org.openqa.selenium.Capabilities) ffProfile);
+			return driver;
+
+		default: // Headless Browser Driver
+			driver = new HtmlUnitDriver(true);
+			// driver = new PhantomJSDriver();
+			return driver;
+		}
+		
 	}
 
 	public static RemoteWebDriver getRemoteWebDriver(Device device, App app) throws MalformedURLException {

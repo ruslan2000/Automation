@@ -18,20 +18,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import bsh.Capabilities;
 import by.ruslan.automation.maven.entity.App;
 import by.ruslan.automation.maven.entity.Device;
 
 public class Manager {
-
-	private static final String REPORT_DIR = "e:/IT/Automation/Report/";
-	private static final String SNAPSHOT_DIR = REPORT_DIR.concat("SnapShot/");
 
 	private static WebDriver driver;
 	private static RemoteWebDriver remoteDriver;
@@ -56,39 +51,42 @@ public class Manager {
 			return driver;
 		}
 	}
-	
-	//SSL Certificate Error Handling
+
+	// SSL Certificate Error Handling
 	public static WebDriver getSSLWebDriver(String webDriverName) {
-		
+
 		switch (webDriverName.toUpperCase()) {
 
 		case "CHROME":
 			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
-			//Deprecated for Java - using ChromeOptions instead 
-			
-			//DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
-			//sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			//driver = new ChromeDriver(sslHandler);
-			
+			// Deprecated for Java - using ChromeOptions instead
+
+			// DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
+			// sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			// driver = new ChromeDriver(sslHandler);
+
 			ChromeOptions chromeOptions = new ChromeOptions();
+
 			chromeOptions.setAcceptInsecureCerts(true);
-			chromeOptions.addArguments("start-maximized"); //maximizing Browser 
+			chromeOptions.addArguments("start-maximized"); // maximizing Browser
 			driver = new ChromeDriver(chromeOptions);
-			
+
 			return driver;
 
 		case "FIREFOX":
 			System.setProperty("webdriver.driver.firefox", "src/main/resources/geckodriver.exe");
-					
-			//DesiredCapabilities capability = DesiredCapabilities.firefox();
-			//capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			//capability.setCapability(FirefoxDriver.PROFILE, ffProfile);
-			
-			FirefoxOptions ffOptions = new FirefoxOptions();
+
+			FirefoxProfile ffProfile = new FirefoxProfile(new File(getProperty("ffProfile")));
+
+			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
+
+			FirefoxOptions ffOptions = new FirefoxOptions(capabilities);
 			ffOptions.setAcceptInsecureCerts(true);
-									
+
 			driver = new FirefoxDriver(ffOptions);
-			
+
 			return driver;
 
 		default: // Headless Browser Driver
@@ -96,13 +94,13 @@ public class Manager {
 			// driver = new PhantomJSDriver();
 			return driver;
 		}
-		
+
 	}
 
 	public static RemoteWebDriver getRemoteWebDriver(Device device, App app) throws MalformedURLException {
-		//String browserName = "mobileOS";
+		// String browserName = "mobileOS";
 
-		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(), 
+		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
 				Platform.ANY);
 
 		capabilities.setCapability("platformName", device.getPlatformName());
@@ -111,7 +109,7 @@ public class Manager {
 		capabilities.setCapability("appPackage", app.getAppPackage());
 		capabilities.setCapability("appActivity", app.getAppActivity());
 
-		remoteDriver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		remoteDriver = new RemoteWebDriver(new URL(getProperty("hostURL")), capabilities);
 
 		return remoteDriver;
 	}
@@ -122,7 +120,7 @@ public class Manager {
 
 		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
-		String fileWithPath = SNAPSHOT_DIR.concat(fileName);
+		String fileWithPath = getProperty("reportDir").concat("/SnapShot/" + fileName);
 
 		File DestFile = new File(fileWithPath);
 
@@ -130,26 +128,26 @@ public class Manager {
 
 	}
 
-	public static Properties getElementsRepository() {
-		
+
+	public static String getProperty(String str) {
+
 		String path = System.getProperty("user.dir").concat("/src/test/resources/webElements.properties");
 
 		Properties elements = new Properties();
 
 		InputStream input;
-		
+
 		try {
 			input = new FileInputStream(new File(path));
-			
+
 			elements.load(input);
-			
+
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
-		return elements;
+
+		return elements.getProperty(str);
 	}
-	
 
 }

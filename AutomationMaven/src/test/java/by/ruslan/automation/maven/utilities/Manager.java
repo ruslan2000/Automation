@@ -14,7 +14,9 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -62,18 +64,30 @@ public class Manager {
 
 		case "CHROME":
 			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
-			DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
-			sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			driver = new ChromeDriver(sslHandler);
+			//Deprecated for Java - using ChromeOptions instead 
+			//DesiredCapabilities sslHandler = DesiredCapabilities.chrome();
+			//sslHandler.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			//driver = new ChromeDriver(sslHandler);
+			
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.setAcceptInsecureCerts(true);
+			chromeOptions.addArguments("start-maximized"); //maximizing Browser 
+			driver = new ChromeDriver(chromeOptions);
+			
 			return driver;
 
 		case "FIREFOX":
 			System.setProperty("webdriver.driver.firefox", "src/main/resources/geckodriver.exe");
-			ProfilesIni prof = new ProfilesIni();				
-			FirefoxProfile ffProfile= prof.getProfile ("myProfile");
-			ffProfile.setAcceptUntrustedCertificates(true); 
-			ffProfile.setAssumeUntrustedCertificateIssuer(false);
-			driver = new FirefoxDriver((org.openqa.selenium.Capabilities) ffProfile);
+					
+			//DesiredCapabilities capability = DesiredCapabilities.firefox();
+			//capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			//capability.setCapability(FirefoxDriver.PROFILE, ffProfile);
+			
+			FirefoxOptions ffOptions = new FirefoxOptions();
+			ffOptions.setAcceptInsecureCerts(true);
+									
+			driver = new FirefoxDriver(ffOptions);
+			
 			return driver;
 
 		default: // Headless Browser Driver

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BrowserSuite">
-  <test thread-count="5" name="Launch">
-      <parameter name="webdriver-name" value="firefox" />
+  <test name="Launch">
+      <parameter name="webdriver-name" value="default" />
     <classes>
       <class name="by.ruslan.automation.maven.test.TestBrowser"/>
     </classes>

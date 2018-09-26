@@ -15,6 +15,13 @@
 			<class name="by.ruslan.automation.maven.test.TestWithManager" />
 		</classes>
 	</test>
+	
+	<test name="ST3">
+		<parameter name="webdriver-name" value="default" />
+		<classes>
+			<class name="by.ruslan.automation.maven.test.TestWithManager" />
+		</classes>
+	</test>
 
 
 </suite>

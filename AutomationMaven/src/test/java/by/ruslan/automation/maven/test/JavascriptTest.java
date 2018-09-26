@@ -13,7 +13,7 @@ public class JavascriptTest extends PrepareWebTest {
 	private PageObject page;
 
 	@BeforeMethod
-	public void preSet() {
+	public void beforeMethod() {
 		js = (JavascriptExecutor) driver;
 		page = new PageObject(driver);
 	}
@@ -39,7 +39,7 @@ public class JavascriptTest extends PrepareWebTest {
 	}
 
 	@AfterMethod
-	public void tearDown() {
+	public void afterMethod() {
 		page.cleanPage();
 	}
 

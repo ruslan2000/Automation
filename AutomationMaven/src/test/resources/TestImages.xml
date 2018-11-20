@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-        <parameter name="webdriver-name" value="Chrome"/>
+        <parameter name="webdriver-name" value="chrome"/>
       <class name="by.ruslan.automation.maven.test.TestImages"/>
     </classes>
   </test> <!-- Test -->

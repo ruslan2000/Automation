@@ -2,15 +2,12 @@
 
 <suite name="Practice" verbose="1">
 
-	<parameter name="webdriver-name" value="Default" />
-	
-	<test name="Broken-Links">
-		<classes>
-			<class name="by.ruslan.automation.maven.test.TestPractice" >
-			    <methods>
-			        <include name="f" />
-			    </methods>
-			</class>
+	<parameter name="webdriver-name" value="firefox" />
+
+	<test name="SimpleTest">
+	    
+		<classes>	
+			<class name="by.ruslan.automation.maven.test.FlashTest" />
 		</classes>
 	</test>
 

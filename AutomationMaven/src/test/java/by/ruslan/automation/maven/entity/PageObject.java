@@ -23,6 +23,9 @@ public class PageObject {
 
 	@FindBy(tagName = "a")
 	List<WebElement> links;
+	
+	@FindBy(tagName = "img")
+	List<WebElement> images;
 
 	protected WebDriver driver;
 	protected WebDriverWait wait;
@@ -31,7 +34,7 @@ public class PageObject {
 	public PageObject(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, 5);
+		wait = new WebDriverWait(driver, 10);
 	}
 
 	public void openHomePage(String homeURL) {
@@ -65,6 +68,14 @@ public class PageObject {
 
 	public void sleep(int millis) throws InterruptedException {
 		Thread.sleep(millis);
+	}
+	
+	public void showNoImages() {
+		for(WebElement image : images) {
+			if(image.getText().contains("no-image.png")) {
+				System.out.println(image.getText());
+			}
+		}
 	}
 
 	public void findBrokenLinks() {

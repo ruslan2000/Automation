@@ -22,7 +22,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import by.ruslan.automation.maven.entity.App;
 import by.ruslan.automation.maven.entity.Device;
 
@@ -120,7 +119,7 @@ public class Manager {
 
 		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
-		String fileWithPath = getProperty("reportDir").concat("/SnapShot/" + fileName);
+		String fileWithPath = getProperty("reportDir").concat(getProperty("projectName")).concat("SnapShot/" + fileName);
 
 		File DestFile = new File(fileWithPath);
 

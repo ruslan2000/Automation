@@ -1,40 +1,35 @@
 package by.ruslan.automation.maven.test;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import by.ruslan.automation.maven.entity.PageObject;
+import by.ruslan.automation.maven.project.pandora.PandoraPage;
 
 public class TestImages extends PrepareWebTest {
 
-	private PageObject page;
-	private JavascriptExecutor js;
+	private PandoraPage page;
 
 	@BeforeTest
 	public void init() {
-		page = new PageObject(driver);
-		js = (JavascriptExecutor) driver;
+		page = new PandoraPage(driver);
 	}
 
 	@Test
-	public void test() throws InterruptedException {
-		//String URL = "https://dev-us.pandora.net/en/gifts/gifts-for-daughters/";
-		String URL = "https://dev-us.pandora.net/en/necklaces/view-all";
+	public void test() throws Exception {
+		// String URL = "https://dev-us.pandora.net/en/gifts/gifts-for-daughters/";
+		// String URL = "https://dev-us.pandora.net/en/necklaces/view-all";
+		// String URL = "https://dev-us.pandora.net/en/charms";
+		// String URL = "https://dev-us.pandora.net/en/whats-new-1/";
+		String URL = "https://dev-us.pandora.net/en/collections"; // 860
 		page.openHomePage(URL);
 
 		int i = 0;
-		while( i < 10) {
-			loadMoreImages(js, page);
+		while (i < 1) {
+			page.loadMoreImages();
 			i++;
 		}
-		
-		page.showNoImages();
-	}
 
-	private void loadMoreImages(JavascriptExecutor js, PageObject page) throws InterruptedException {
-		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
-		page.sleep(2000);
+		page.showNoImages();
 	}
 
 }

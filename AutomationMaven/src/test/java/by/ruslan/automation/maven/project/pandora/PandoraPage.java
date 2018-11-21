@@ -1,8 +1,5 @@
 package by.ruslan.automation.maven.project.pandora;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,9 +14,6 @@ public class PandoraPage extends PageObject{
 	@FindBy(className = "load-more-button")
 	WebElement loadMoreBtn;
 	
-	
-	//@FindBy(tagName = "img")
-	//List<WebElement> images;
 
 	private JavascriptExecutor js;
 	
@@ -40,22 +34,25 @@ public class PandoraPage extends PageObject{
 		}
 	}
 	
+	
 	public void showNoImages() throws Exception {
 		js.executeScript("window.scrollTo(0,0)");
 		
 		for(WebElement image : findAllImages()) {
 			if(image.getAttribute("src").contains("no-image.png")) {
-				String xpath = "//*[@src=\'" + image.getAttribute("src") + "\']/../../../div[6]/a[@class=\'name-link\']";
-				
-				WebElement productName = driver.findElement(By.xpath(xpath));
+				//String xpath = "//*[@src=\'" + image.getAttribute("src") + "\']/../../../div[6]/a[@class=\'name-link\']";
+				//xpath = "//*[@src=\'" + image.getAttribute("src") + "\']";
+								
 				System.out.println(image.getAttribute("src") + " LOCATION: " + image.getLocation());
-				//System.out.println(productName.getAttribute("title"));
+				System.out.println(image.getAttribute("title"));
 				
-				//js.executeScript("arguments[0].scrollIntoView(true)", image);
+				js.executeScript("arguments[0].scrollIntoView(true)", image);
 				
 				moveTo(image);
 				
-				Manager.takeSnapShot(image.getLocation().toString() + ".png");
+				Manager.takeSnapShot(image.getAttribute("title") + ".png");
+				
+				
 				
 			}
 		}

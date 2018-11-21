@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,7 +35,7 @@ public class PageObject {
 	public PageObject(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 5);
 	}
 
 	public void openHomePage(String homeURL) {
@@ -70,14 +71,17 @@ public class PageObject {
 		Thread.sleep(millis);
 	}
 	
-	public void showNoImages() {
-		for(WebElement image : images) {
-			if(image.getText().contains("no-image.png")) {
-				System.out.println(image.getText());
-			}
-		}
+	//scroll the screen to the element
+	public void moveTo(WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element);
+		actions.perform();
 	}
-
+	
+	public List<WebElement> findAllImages(){
+		return images;
+	}
+	
 	public void findBrokenLinks() {
 		HttpURLConnection huc = null;
 		int respCode = 200;

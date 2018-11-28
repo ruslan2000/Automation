@@ -4,7 +4,14 @@
 	<test name="Motorola-Moto-G5">
 		<parameter name="device-id" value="ZY2243SKXL" />
 		<classes>
-			<class name="by.ruslan.automation.maven.test.TestPractice" />
+			<class name="by.ruslan.automation.maven.test.AppTest" >
+			    <methods>
+			        <include name="skipGetStarted" />
+			        <include name="skipAlert" />
+			      <!--   <include name="clickSearchBtn" />   -->
+			        <include name="search" />
+			    </methods>
+			</class>
 		</classes>
 	</test> 
 </suite> 

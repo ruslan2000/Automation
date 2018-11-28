@@ -36,6 +36,13 @@
 			<version>2.32.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
 
 
 
@@ -62,7 +69,8 @@
 					<suiteXmlFiles>
 						<!--<suiteXmlFile>src/test/resources/TestSuites.xml</suiteXmlFile> -->
 						<!-- <suiteXmlFile>src/test/resources/TestWithManager.xml</suiteXmlFile> -->
-						<suiteXmlFile>src/test/resources/TestImages.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/TestImages.xml</suiteXmlFile> -->
+						<suiteXmlFile>src/test/resources/AppTest.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>

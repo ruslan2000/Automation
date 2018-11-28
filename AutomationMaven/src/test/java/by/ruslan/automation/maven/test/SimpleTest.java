@@ -25,7 +25,7 @@ public class SimpleTest extends PrepareWebTest {
 		cbgPage.openHomeURL();
 		// Reporter.log("Home url is opened"); //better to use Log4j
 
-		cbgPage.sleep(100);
+		cbgPage.sleep(100); 
 
 	}
 

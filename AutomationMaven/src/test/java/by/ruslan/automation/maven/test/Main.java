@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		System.out.println(Manager.getProperty("reportDir"));
-		
+		 
 	
 		FileUtils.write(new File("c:\\Users\\Ruslan\\Documents\\test.txt"), "Hello\nRuslan","utf-8");
 

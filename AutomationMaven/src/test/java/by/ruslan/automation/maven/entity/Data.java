@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 
 public class Data {
 	
-	@DataProvider(name="dataId")
+	@DataProvider(name="dataId") 
 	public Object[][] getData() {
 		
 		Object[][] data = new Object[][]{

@@ -24,7 +24,7 @@ public class TestWithManager {
 
 		page.goToStock();
 		
-	//	page.sleep(100);
+	//	page.sleep(100); 
 	}
 	
 	@Test

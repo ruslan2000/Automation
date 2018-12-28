@@ -26,20 +26,20 @@ public class PandoraPage extends PageObject{
 	
 	public void loadMoreImages() throws InterruptedException {
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
-		//js.executeScript("window.scrollBy(0,500)");
+		js.executeScript("window.scrollBy(0,-500)");
 		sleep(2000);
 		
 		if(loadMoreBtn.isDisplayed()) {
 			loadMoreBtn.click();
 		}
 	}
-	
+	 
 	
 	public void showNoImages() throws Exception {
-		js.executeScript("window.scrollTo(0,0)");
+		js.executeScript("window.scrollTo(0,500)");
 		
 		for(WebElement image : findAllImages()) {
-			if(image.getAttribute("src").contains("no-image.png")) {
+			if(image.getAttribute("src").contains("no-image.png") || image.getAttribute("alt").contains("null")) {
 				//String xpath = "//*[@src=\'" + image.getAttribute("src") + "\']/../../../div[6]/a[@class=\'name-link\']";
 				//xpath = "//*[@src=\'" + image.getAttribute("src") + "\']";
 								

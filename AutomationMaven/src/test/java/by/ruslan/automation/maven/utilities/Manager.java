@@ -24,9 +24,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import by.ruslan.automation.maven.entity.App;
 import by.ruslan.automation.maven.entity.Device;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+
 
 public class Manager {
-
+ 
 	private static WebDriver driver;
 	private static RemoteWebDriver remoteDriver;
 
@@ -37,6 +40,7 @@ public class Manager {
 		case "CHROME":
 			System.setProperty("webdriver.driver.chrome", "src/main/resources/chromedriver.exe");
 			driver = new ChromeDriver();
+			driver.manage().window().maximize();
 			return driver;
 
 		case "FIREFOX":
@@ -112,7 +116,43 @@ public class Manager {
 
 		return remoteDriver;
 	}
+	
+	public static AndroidDriver getAndroidDriver(Device device, App app) throws MalformedURLException {
+		// String browserName = "mobileOS";
 
+		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
+				Platform.ANY);
+
+		capabilities.setCapability("platformName", device.getPlatformName());
+		capabilities.setCapability("deviceName", device.getId());
+
+		capabilities.setCapability("appPackage", app.getAppPackage());
+		capabilities.setCapability("appActivity", app.getAppActivity());
+
+		AndroidDriver driver = new AndroidDriver(new URL(getProperty("hostURL")), capabilities);
+
+		return driver;
+	}
+
+	public static AppiumDriver getAppiumDriver(Device device, App app) throws MalformedURLException {
+		// String browserName = "mobileOS";
+
+		DesiredCapabilities capabilities = new DesiredCapabilities(device.getBrowserName(), device.getVersion(),
+				Platform.ANY);
+
+		capabilities.setCapability("platformName", device.getPlatformName());
+		capabilities.setCapability("deviceName", device.getId());
+
+		capabilities.setCapability("appPackage", app.getAppPackage());
+		capabilities.setCapability("appActivity", app.getAppActivity());
+
+		AppiumDriver driver = new AppiumDriver(new URL(getProperty("hostURL")), capabilities);
+
+		return driver;
+	}
+
+	
+	
 	public static void takeSnapShot(String fileName) throws Exception {
 
 		TakesScreenshot scrShot = ((TakesScreenshot) driver);

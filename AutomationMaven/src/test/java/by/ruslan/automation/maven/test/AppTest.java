@@ -1,7 +1,9 @@
 package by.ruslan.automation.maven.test;
 
 import java.net.MalformedURLException;
+import java.time.Duration;
 
+import org.eclipse.jetty.util.ssl.AliasedX509ExtendedKeyManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -18,6 +20,9 @@ import by.ruslan.automation.maven.project.goodrx.GoodRx;
 import by.ruslan.automation.maven.utilities.Manager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class AppTest {
 
@@ -52,11 +57,15 @@ public class AppTest {
 	}
 
 	@Test(dataProvider = "drugsName", dataProviderClass = Drugs.class) // , priority = 2)
-	public void search(String drug) {
+	public void search(String drug) throws InterruptedException {
 
 		app.searchField(drug);
+		
+		Thread.sleep(1000);
 
 		app.searchResultClickElement(1);
+		
+		Thread.sleep(1000);
 
 		app.findPrice();
 
@@ -73,16 +82,20 @@ public class AppTest {
 			// e.printStackTrace();
 		}
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 
-			WebElement priceType = app.showPrice(i);
-
+			WebElement priceType = app.showPrice(0);
+			
+			Thread.sleep(1000);
+			
 			String type = priceType.getText();
 
-			System.out.print(type + ": ");
+			System.out.println(type);
 
 			priceType.click();
 
+			Thread.sleep(2000);
+			
 			switch (type) {
 			case "Coupon":
 				app.couponPrice();
@@ -113,7 +126,10 @@ public class AppTest {
 				break;
 			}
 
+			Thread.sleep(1000);
+			
 			driver.navigate().back();
+									
 
 			try {
 				skipAlert();
@@ -121,6 +137,8 @@ public class AppTest {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 			}
+			
+			scrollElement2ToElement1(app);
 
 		}
 		driver.navigate().back();
@@ -128,6 +146,27 @@ public class AppTest {
 		app.clearSearchField();
 	}
 
+	private void scrollElement2ToElement1(GoodRx app) {
+		WebElement el2 = app.priceList().get(1);
+		WebElement el1 = app.priceMapHeader();
+		
+		int x0 = el2.getLocation().getX();
+		int y0 = el2.getLocation().getY();
+		
+		int y = el1.getLocation().getY();
+		
+		TouchAction action = new TouchAction(driver);
+		
+		PointOption pressPoint = new PointOption<>();
+		pressPoint.withCoordinates(x0, y0);
+		
+		PointOption moveToPoint = new PointOption<>();
+		moveToPoint.withCoordinates(x0, y);
+		action.press(pressPoint).waitAction().moveTo(moveToPoint).release().perform();
+		
+	}
+
+	
 	@Parameters({ "device-id" })
 	@BeforeTest
 	public void beforeTest(String deviceId) throws MalformedURLException, InterruptedException {
@@ -137,7 +176,6 @@ public class AppTest {
 		driver = Manager.getAppiumDriver(device, app);
 		wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("imageview_close")));
-
 		PageFactory.initElements(driver, app);
 
 	}

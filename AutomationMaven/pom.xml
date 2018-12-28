@@ -67,10 +67,10 @@
 				<version>2.22.0</version>
 				<configuration>
 					<suiteXmlFiles>
-						<!--<suiteXmlFile>src/test/resources/TestSuites.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>src/test/resources/StageTest.xml</suiteXmlFile>  -->
 						<!-- <suiteXmlFile>src/test/resources/TestWithManager.xml</suiteXmlFile> -->
-						<!-- <suiteXmlFile>src/test/resources/TestImages.xml</suiteXmlFile> -->
-						<suiteXmlFile>src/test/resources/AppTest.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/TestImages.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/AppTest.xml</suiteXmlFile>  -->
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
